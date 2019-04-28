@@ -1,0 +1,55 @@
+.main-table {
+    border: 1px #4d6a8e solid;
+    border-radius: 8px;
+}
+
+.main-table tr {
+    transition: 250ms;
+}
+
+.main-table tr:hover {
+    background-color: #dddddd;
+}
+
+.main-table th, td {
+    border: 1px #4d6a8e solid;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+.deletebtn:link {
+    background-color: #ff6a6a;
+    color: #fff8f6;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.deletebtn:visited {
+    color: white;
+}
+
+.deletebtn:hover, .deletebtn:active {
+    background-color: #ff213e;
+}
+
+
+.changebtn:link {
+    background-color: #26d425;
+    color: #fff8f6;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    block-size: 150px 100px;
+}
+
+.changebtn:visited {
+    color: white;
+}
+
+.changebtn:hover, .changebtn:active {
+    background-color: #2bbf36;
+}

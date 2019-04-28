@@ -1,0 +1,61 @@
+.main-form {
+    border: 1px outset #6f95af;
+    border-radius: 8px;
+    height: auto;
+    margin-left: 3%;
+    box-shadow: 10px 10px 5px #9da3a8;
+}
+
+.main-form .form-input {
+    float: right;
+    margin-right: 5%;
+    margin-bottom: 5px;
+    width: 50%;
+    height: 30px;
+    font-size: 16px;
+}
+
+.main-form select {
+    float: right;
+    margin-right: 5%;
+    margin-bottom: 5px;
+    width: 50%;
+    height: 30px;
+    font-size: 16px;
+}
+
+.main-form textarea {
+    float: right;
+    margin-right: 5%;
+    width: 50%;
+    font-size: 16px;
+}
+
+.main-form .submit-btn {
+    margin-left: 5%;
+    margin-bottom: 15px;
+    margin-top: 30px;
+    width: 30%;
+    background-color: #6f95af;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: 1px solid #6f95af;
+    border-radius: 5px;
+    height: 50px;
+    transition: 250ms;
+
+}
+
+.main-form .submit-btn:hover {
+    background-color: #4d6a8e;
+}
+
+.main-form label, p, li {
+    /*float: left;*/
+    margin-left: 5%;
+    font-size: 20px;
+    /*width: 30%;*/
+}
+
+
