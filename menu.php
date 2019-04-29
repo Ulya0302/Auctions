@@ -25,6 +25,7 @@
         <button class="dropbtn">Аукционы</button>
         <div class="dropdown-content">
             <a href="add_auction.php">Добавить аукцион</a>
+            <a href="add_auction.php">Добавить аукцион ТЕСТ</a>
             <a href="auctions_stat.php">Статистика по продажам аукционов</a>
             <a href="auction_chronology.php">Хронология аукционов</a>
             <a href="auc_place_stat.php">Аукционы по месту</a>
