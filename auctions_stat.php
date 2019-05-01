@@ -5,9 +5,7 @@ if (isset($_GET["del"])) {
     $id = $_GET["del"];
     $query = "DELETE FROM auctions where id={$id}";
     $result = $conn->query($query);
-    if ($result == true) {
-        alert('Удалено');
-    } else {
+    if ($result == false) {
         alert('Удалить не удалось: {$conn->error}');
     }
 }

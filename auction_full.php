@@ -10,7 +10,8 @@ include_once('db/db_conn_open.php');
 $id = $_GET['id'];
 $query =
     "SELECT date_auc, time_auc, pl.name place, auc.description descr
-        FROM auctions auc inner join place pl on auc.place_id = pl.id
+        FROM auctions auc 
+        inner join place pl on auc.place_id = pl.id
         WHERE auc.id = {$id}";
 $result_auc = mysqli_query($conn, $query) or die(mysqli_error($conn));
 $row = mysqli_fetch_assoc($result_auc);
@@ -27,12 +28,14 @@ echo "<p>Время аукциона: {$auc_time}</p><hr/>";
 echo "<p>Место: {$auc_place}</p><hr/>";
 
 $query =
-    "SELECT description, start_cost from lots where auction_id = ${id}";
+    "SELECT s.name name, start_cost from lots 
+    inner join subjects s on s.id = lots.subject_id
+    where auction_id = ${id}";
 $result_lots = mysqli_query($conn, $query) or die(mysqli_error($conn));;
 echo "<p>Лоты, выставленные на аукционе:</p>";
 echo "<ol>";
 while ($row = mysqli_fetch_assoc($result_lots)) {
-    echo "<li>{$row['description']} {$row['start_cost']} </li>";
+    echo "<li>{$row['name']}<br>Стартовая цена: {$row['start_cost']}</li><br>";
 }
 echo "</ol>";
 echo "</div>";

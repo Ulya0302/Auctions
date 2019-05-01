@@ -5,6 +5,6 @@ function convert_time($time) {
 }
 
 function alert($text) {
-    echo "<script>alert('{$text}')</script>";
+    echo "<script>alert(\"{$text}\")</script>";
 }
 

@@ -1,31 +1,9 @@
-<!--<nav role = "navigation" >-->
-<!--    <ul>-->
-<!--        <li>-->
-<!--            <a>Аукционы</a>-->
-<!--			         	<a class="dropdown-item" href="auctions_stat.php">Статистика по продажам аукционов</a>-->
-<!--			        	<a class="dropdown-item" href="#">Статистика по аукционам</a>-->
-<!--        			</div>-->
-<!--	        </li>-->
-<!--	        <li class="nav-item dropdown">-->
-<!--	        	<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdow" aria-haspopup="true" aria-expanded="false">Участники</a>-->
-<!--	        	<div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-<!--	        		<a href="auctions_stat.php">Статистика по продавцам</a>-->
-<!--	        		<div class="dropdown-divider"></div>	-->
-<!--	    			<a href="auctions_stat.php">Статистика по покупателям</a>-->
-<!--	    		</div>-->
-<!--	    	</li>	  -->
-<!--		</ul>-->
-<!--	</div>-->
-<!--</nav>-->
-<!---->
-
 <link rel="stylesheet" href="css/dropdown-menu.css" type="text/css">
 <nav>
     <div class="dropdown" >
         <button class="dropbtn">Аукционы</button>
         <div class="dropdown-content">
             <a href="add_auction.php">Добавить аукцион</a>
-            <a href="add_auction.php">Добавить аукцион ТЕСТ</a>
             <a href="auctions_stat.php">Статистика по продажам аукционов</a>
             <a href="auction_chronology.php">Хронология аукционов</a>
             <a href="auc_place_stat.php">Аукционы по месту</a>

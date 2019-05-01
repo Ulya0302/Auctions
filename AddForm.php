@@ -3,12 +3,13 @@
 
 class AddForm
 {
-    public $fields; // [[nameDB, type, label, selection(val, viewval, tableName)][]]
+    public $fields; // [[nameDB, type, label, selection(val, viewVal, tableName)][]]
     public $filename;
     public $tableName;
     public $nameForm;
     public $newTitle;
     public $editTitle;
+    public $errno1062unic;
 
     function initForm()
     {
@@ -27,11 +28,11 @@ class AddForm
                 echo '</p></label>';
             } elseif ($field['type'] == 'textarea') {
                 echo '<p><label>' . $field['label'] .
-                    '<textarea id="' . $field['name'] . '" name="' . $field['name'] . '"></textarea></label></p>';
+                    '<textarea id="' . $field['name'] . '" name="' . $field['name'] . '" required></textarea></label></p>';
             } else {
                 echo '<p><label>' . $field['label'] .
                     '<input class="form-input" id="' . $field['name'] .
-                    '" name="'.$field['name'].'" type="' . $field['type'] . '"/></label></p>';
+                    '" name="' . $field['name'] . '" type="' . $field['type'] . '" required/></label></p>';
             }
         }
         echo '<input id="submit-btn" class="submit-btn" type="submit" value="Создать">';
@@ -66,9 +67,11 @@ class AddForm
         } elseif (isset($_GET['id'])) {
             $this->changeOnEdit($_GET['id']);
         }
+
     }
 
-    function create() {
+    function create()
+    {
         global $conn;
         include_once('db/db_conn_open.php');
         include_once('utils.php');
@@ -82,34 +85,40 @@ class AddForm
         $col_values = join($col_values, "', '");
 
         $query =
-            "INSERT INTO ".$this->tableName."($cols)
+            "INSERT INTO " . $this->tableName . "($cols)
         VALUES ('$col_values')";
         $result = $conn->query($query);
-        if ($result === TRUE) {
+        echo $query;
+        if ($result == TRUE) {
             alert('Новая запись добавлена успешно');
         } else {
-            alert('Ошибка, добавить запись не удалось');
+            if ($conn->errno == 1062) {
+                alert("Ошибка, добавить запись не удалось: ".$this->errno1062unic);
+            } else {
+                alert("Неизвестная ошибка");
+            }
         }
     }
 
-    function update($id) {
+    function update($id)
+    {
         global $conn;
         include_once('db/db_conn_open.php');
         include_once('utils.php');
         $cols = array();
         foreach ($this->fields as $val) {
-            array_push($cols, $val['name'].' = '.$_POST[$val['name']]);
+            $key = $val['name'];
+            $value = $_POST[$val['name']];
+            array_push($cols, "$key = '$value'");
         }
         $cols = join(", ", $cols);
         $query =
-            "UPDATE ".$this->tableName." SET $cols WHERE id = $id" ;
-        echo $query;
+            "UPDATE " . $this->tableName . " SET $cols WHERE id = $id";
         $result = $conn->query($query);
-        if ($result === true) {
+        if ($result == true) {
             alert('Изменено!');
         } else {
-            echo $conn->error;
-            alert('Не удалось изменить');
+            alert('Не удалось изменить: '.$conn->error);
         }
     }
 
@@ -124,12 +133,12 @@ class AddForm
         include_once('utils.php');
         $cols = join(", ", $cols);
         $query = "SELECT $cols FROM " . $this->tableName . " WHERE id = $id";
-        $res = $conn->query($query);
+        $res = $conn->query($query);;
         if ($res == true) {
             $row = $res->fetch_assoc();
             echo "<script>
                     document.getElementById('title').textContent = '" . $this->editTitle . "';
-                    document.getElementById('auc_id').value = '$id';
+                    document.getElementById('id').value = '$id';
                     document.getElementById('submit-btn').value = 'Сохранить';
                   </script>";
             foreach ($this->fields as $val) {
