@@ -9,20 +9,31 @@
             <a href="auc_place_stat.php">Аукционы по месту</a>
         </div>
     </div>
+
     <div class="dropdown">
         <button class="dropbtn">Участники</button>
         <div class="dropdown-content">
-            <a href="participant_stat.php">Статистика по участникам</a>
             <a href="add_participant.php">Добавить нового участника</a>
+            <a href="participant_stat.php">Статистика по участникам</a>
         </div>
     </div>
+
     <div class="dropdown">
         <button class="dropbtn">Лоты</button>
         <div class="dropdown-content">
             <a href="add_lot.php">Добавить новый лот</a>
-            <a href="menu.php">Показать текущие места</a>
+            <a href="menu.php">Получить лоты</a>
         </div>
     </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">Предметы</button>
+        <div class="dropdown-content">
+            <a href="add_subject.php">Добавить предмет</a>
+            <a href="all_place.php">Показать текущие предметы</a>
+        </div>
+    </div>
+
     <div class="dropdown">
         <button class="dropbtn">Места</button>
         <div class="dropdown-content">

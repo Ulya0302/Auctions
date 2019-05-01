@@ -10,6 +10,7 @@ class AddForm
     public $newTitle;
     public $editTitle;
     public $errno1062unic;
+    public $disabled_cols;
 
     function initForm()
     {
@@ -88,8 +89,7 @@ class AddForm
             "INSERT INTO " . $this->tableName . "($cols)
         VALUES ('$col_values')";
         $result = $conn->query($query);
-        echo $query;
-        if ($result == TRUE) {
+        if ($result == true) {
             alert('Новая запись добавлена успешно');
         } else {
             if ($conn->errno == 1062) {
@@ -150,9 +150,19 @@ class AddForm
                     echo "<script>document.getElementById('" . $val['name'] . "').value = '" . $row[$val['name']] . "'</script>";
                 }
             }
+            $this->set_disabled();
         } else {
             alert('Не удалось загрузить данные');
         }
+    }
 
+    function set_disabled() {
+        if ($this->disabled_cols) {
+            foreach ($this->disabled_cols as $val) {
+                echo "<script>
+           document.getElementById('$val').disabled = true;
+           </script>;";
+            }
+        }
     }
 }

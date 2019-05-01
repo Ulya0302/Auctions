@@ -20,6 +20,7 @@ $form->newTitle = 'Добавить лот';
 $form->editTitle = 'Изменить информацию о лоте';
 $form->tableName = 'lots';
 $form->errno1062unic = 'Лот с таким номером или такой предмет уже существует на данном аукционе';
+$form->disabled_cols = ['auction_id', 'subject_id'];
 $form->fields =
     array(
         array('label' => 'Аукцион: ', 'type' => 'selection', 'name' => 'auction_id',
@@ -31,13 +32,6 @@ $form->fields =
     );
 $form->initForm();
 $form->makeRes();
-if (isset($_GET['id'])) {
-    echo "<script>
-           document.getElementById('auction_id').disabled = true;
-           document.getElementById('subject_id').disabled = true;
-           </script>";
-
-}
 ?>
 </body>
 </html>
