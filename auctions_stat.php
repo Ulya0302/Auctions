@@ -13,7 +13,7 @@ if (isset($_GET["del"])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <title>Статистика по продажам</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -31,6 +31,7 @@ if (isset($_GET["del"])) {
 <hr/>
 <table class="main-table width-85">
     <tr>
+        <th>Краткое наименование</th>
         <th class="col-10 centered-text">Дата проведения</th>
         <th class="col-5 centered-text">Время проведения</th>
         <th class="col-15 centered-text">Место проведения</th>
@@ -43,10 +44,10 @@ if (isset($_GET["del"])) {
     <?php
 
     $query =
-        "SELECT auc.id id, date_auc, time_auc, pl.name place, auc.description descr, sum(start_cost) sum_c 
-        FROM auctions auc left join lots on auc.id=lots.auction_id 
+        "SELECT auc.id id, auc.name name, date_auc, time_auc, pl.name place, auc.description descr, sum(start_cost) sum_c 
+        FROM auctions auc left join lots on auc.id=lots.auc_id 
             left join purchases p on lots.id = p.lot_id 
-            inner  join place pl on auc.place_id = pl.id
+            inner  join places pl on auc.place_id = pl.id
         GROUP BY auc.id order by sum_c DESC";
 
     $result = $conn->query($query);
@@ -55,6 +56,7 @@ if (isset($_GET["del"])) {
         $id = $row['id'];
         $auc_time = convert_time($row['time_auc']);
         echo "<tr>";
+        echo "<td>{$row['name']}</td>";
         echo "<td>{$row['date_auc']}</td>";
         echo "<td>{$auc_time}</td>";
         echo "<td>{$row['place']}</td>";

@@ -1,4 +1,4 @@
-<html>
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <title>Добавить лот</title>
@@ -25,10 +25,10 @@ $form->fields =
     array(
         array('label' => 'Аукцион: ', 'type' => 'selection', 'name' => 'auction_id',
             'selection' => array('val' => 'id', 'viewVal' => 'description', 'tableName' => 'auctions')),
-        array('label' => 'Предмет: ', 'type' => 'selection', 'name' => 'subject_id',
-            'selection' => array('val' => 'id', 'viewVal' => 'name', 'tableName' => 'subjects')),
-        array('label' => 'Номер лота: ', 'type' => 'number', 'name' => 'lot_number'),
-        array('label' => 'Стартовая цена: ', 'type' => 'number', 'name' => 'start_cost')
+        array('label' => 'Предмет: ', 'type' => 'selection', 'name' => 'thing_id',
+            'selection' => array('val' => 'id', 'viewVal' => 'name', 'tableName' => 'things')),
+        array('label' => 'Номер лота: ', 'type' => 'number', 'name' => 'lot_number', 'max' => '9999999999'),
+        array('label' => 'Стартовая цена: ', 'type' => 'number', 'name' => 'start_cost', 'max' => '999999999999999999')
     );
 $form->initForm();
 $form->makeRes();

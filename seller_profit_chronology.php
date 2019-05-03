@@ -3,41 +3,44 @@ function create_table($conn)
 {
     $date_from = $_GET['fromDate'];
     $date_to = $_GET['toDate'];
-    echo "<hr/><h3>Статистика аукционов с {$date_from} по {$date_to}</h3><hr/>";
+    echo "<hr/><h3 align='center'>Статистика по доходу продавцов в аукционах с {$date_from} по {$date_to}</h3><hr/>";
     echo '
-    <table class="main-table width-60" >
+    <table class="main-table width-60">
     <tr style="height: 40px">
-        <th >Об аукционе</th>
-        <th>Краткое наименование</th>
-        <th class="col-25">Место проведения</th>
-        <th class="col-10">Дата проведения</th>
-        <th class="col-10" ">Время проведения</th>
-        <th class="col-10"></th>
+        <th>Участник</th>
+        <th>Телефон</th>
+        <th>Email</th>
+        <th>Суммарный доход</th>
+        <th></th>
     </tr>';
     $query =
-        "SELECT auc.id id, auc.name name, date_auc, time_auc, pl.name place, auc.description descr
-        FROM auctions auc inner join places pl on auc.place_id = pl.id
-        WHERE date_auc >= '{$date_from}' and date_auc <= '{$date_to}'
-        ORDER BY date_auc ASC";
+        "SELECT p.id id, p.name name, phone, email, sum(pur.final_cost) profit
+            FROM participants p
+            left join things s on s.owner_id = p.id
+            left join lots l on l.thing_id = s.id
+            left join purchases pur on pur.lot_id = l.id
+            left JOIN auctions a on l.auc_id = a.id
+            where a.date_auc >= '{$date_from}' and a.date_auc <= '{$date_to}'
+            GROUP BY p.name
+            ORDER BY profit desc 
+";
 
     $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
 
     while ($row = mysqli_fetch_assoc($result)) {
         $id = $row['id'];
-        $time_auc = convert_time($row['time_auc']);
         echo "<tr>";
         echo "<td>{$row['name']}</td>";
-        echo "<td>{$row['descr']}</td>";
-        echo "<td>{$row['place']}</td>";
-        echo "<td>{$row['date_auc']}</td>";
-        echo "<td>{$time_auc}</td>";
+        echo "<td>{$row['phone']}</td>";
+        echo "<td>{$row['email']}</td>";
+        echo "<td>{$row['profit']}</td>";
         echo "<td><a class='changebtn' href='auction_full.php?id={$id}'>Подробнее</a>";
         echo "</tr>";
     }
 
     echo "</table>";
 
-    mysqli_free_result($result);
+    $result->free_result();
 
     //        include_once("db/db_conn_close.php");
 
@@ -53,12 +56,12 @@ function create_table($conn)
     <link rel="stylesheet" href="css/table-style.css" type="text/css">
     <link rel="stylesheet" href="css/common.css" type="text/css">
     <?php include_once("db/db_conn_open.php");
-    include_once("utils.php")?>
+    include_once("utils.php") ?>
 
 </head>
 <body onload="setData()">
 <?php include_once("menu.php") ?>
-<form class="main-form width-40"  method="GET" action="auction_chronology.php">
+<form class="main-form width-40" method="GET" action="seller_profit_chronology.php">
     <p><label>С даты: <input placeholder="С даты" id="fromDate" class="form-input" name="fromDate" type="date"
                              required/></label></p>
     <p><label>По дату: <input placeholder="По дату" id="toDate" class="form-input" name="toDate" type="date" required/></label>

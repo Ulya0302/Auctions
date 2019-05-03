@@ -1,4 +1,4 @@
-<html>
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <title>Добавить предмет</title>
@@ -18,11 +18,11 @@ $form = new AddForm();
 $form->filename = 'add_subject.php';
 $form->newTitle = 'Добавить предмет';
 $form->editTitle = 'Изменить информацию о предмете';
-$form->tableName = 'subjects';
+$form->tableName = 'things';
 $form->errno1062unic = 'Имя должно быть уникальным';
 $form->fields =
     array(
-        array('label' => 'Краткое наименование: ', 'type' => 'text', 'name' => 'name'),
+        array('label' => 'Краткое наименование: ', 'type' => 'text-with-max', 'name' => 'name', 'max' => '60'),
         array('label' => 'Продавец: ', 'type' => 'selection', 'name' => 'owner_id',
             'selection' => array('val' => 'id', 'viewVal' => 'name', 'tableName' => 'participants')),
         array('label' => 'Описание: ', 'type' => 'textarea', 'name' => 'description')

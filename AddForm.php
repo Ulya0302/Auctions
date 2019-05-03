@@ -18,23 +18,47 @@ class AddForm
         echo '<h2 align="center" id="title">' . $this->newTitle . '</h2>';
         echo '<input id="id" name="id" hidden>';
         foreach ($this->fields as $field) {
-            if ($field['type'] == 'selection') {
-                echo '<p><label>' . $field['label'];
-                $this->generateSelection(
-                    $field['name'],
-                    $field['selection']['val'],
-                    $field['selection']['viewVal'],
-                    $field['selection']['tableName']
-                );
-                echo '</p></label>';
-            } elseif ($field['type'] == 'textarea') {
-                echo '<p><label>' . $field['label'] .
-                    '<textarea id="' . $field['name'] . '" name="' . $field['name'] . '" required></textarea></label></p>';
-            } else {
-                echo '<p><label>' . $field['label'] .
-                    '<input class="form-input" id="' . $field['name'] .
-                    '" name="' . $field['name'] . '" type="' . $field['type'] . '" required/></label></p>';
+            switch ($field['type']) {
+                case 'selection':
+                    echo '<p><label>' . $field['label'];
+                    $this->generateSelection(
+                        $field['name'],
+                        $field['selection']['val'],
+                        $field['selection']['viewVal'],
+                        $field['selection']['tableName']
+                    );
+                    echo '</p></label>';
+                    break;
+                case 'textarea':
+                    echo '<p><label>' . $field['label'] .
+                        '<textarea id="' . $field['name'] . '" name="' . $field['name'] . '" required></textarea>
+                        </label></p>';
+                    break;
+                case 'tel':
+                    echo '<p><label>' . $field['label'] .
+                        '<input pattern="' . $field['pattern'] . '" 
+                        placeholder="' . $field['placeholder'] . '" class="form-input" 
+                        id="' . $field['name'] .
+                        '" name="' . $field['name'] . '" type="' . $field['type'] . '" required/>
+                        </label></p>';
+                    break;
+                case 'number':
+                    echo '<p><label>' . $field['label'] .
+                        '<input max="' . $field['max'] . '" class="form-input" id="' . $field['name'] .
+                        '" name="' . $field['name'] . '" type="' . $field['type'] . '" required/></label></p>';
+                    break;
+                case 'text-with-max':
+                    echo '<p><label>' . $field['label'] .
+                        '<input placeholder="Максимальная длина: ' . $field['max'] . '" maxlength="' . $field['max'] . '" class="form-input" id="' . $field['name'] .
+                        '" name="' . $field['name'] . '" type="' . $field['type'] . '" required/></label></p>';
+                    break;
+                default:
+                    echo '<p><label>' . $field['label'] .
+                        '<input class="form-input" id="' . $field['name'] .
+                        '" name="' . $field['name'] . '" type="' . $field['type'] . '" required/></label></p>';
+
             }
+
         }
         echo '<input id="submit-btn" class="submit-btn" type="submit" value="Создать">';
         echo '</form>';
@@ -93,7 +117,7 @@ class AddForm
             alert('Новая запись добавлена успешно');
         } else {
             if ($conn->errno == 1062) {
-                alert("Ошибка, добавить запись не удалось: ".$this->errno1062unic);
+                alert("Ошибка, добавить запись не удалось: " . $this->errno1062unic);
             } else {
                 alert("Неизвестная ошибка");
             }
@@ -118,7 +142,7 @@ class AddForm
         if ($result == true) {
             alert('Изменено!');
         } else {
-            alert('Не удалось изменить: '.$conn->error);
+            alert('Не удалось изменить: ' . $conn->error);
         }
     }
 
@@ -156,7 +180,8 @@ class AddForm
         }
     }
 
-    function set_disabled() {
+    function set_disabled()
+    {
         if ($this->disabled_cols) {
             foreach ($this->disabled_cols as $val) {
                 echo "<script>

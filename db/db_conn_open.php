@@ -3,8 +3,9 @@
 $hostname = "localhost";
 $username = "root";
 $password = "mypass";
-$dbName = "auctions_db";
+$dbName = "auction_new";
 /* создать соединение */
+
 $conn = mysqli_connect( $hostname, $username, $password, $dbName) or die( "Не могу создать соединение ");
 
 mysqli_set_charset($conn, 'utf8');

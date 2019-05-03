@@ -14,7 +14,8 @@
         <button class="dropbtn">Участники</button>
         <div class="dropdown-content">
             <a href="add_participant.php">Добавить нового участника</a>
-            <a href="participant_stat.php">Статистика по участникам</a>
+            <a href="seller_profit_chronology.php">Статистика по доходам продавцов</a>
+            <a href="seller_activity.php">Статистика по активности продавцов</a>
         </div>
     </div>
 

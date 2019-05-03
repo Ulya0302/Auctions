@@ -5,6 +5,7 @@ function create_table($conn)
     <table class="main-table width-60" >
     <tr>
         <th >Об аукционе</th>
+        <th>Краткое название</th>
         <th class="col-20">Место проведения</th>
         <th class="col-10">Дата проведения</th>
         <th class="col-10">Время проведения</th>
@@ -12,8 +13,8 @@ function create_table($conn)
         <th>Посмотреть лоты</th>
     </tr>';
     $query =
-        "SELECT auc.id id, date_auc, time_auc, pl.name place, auc.description descr, count(lots.id) auc_c
-        FROM auctions auc inner join place pl on auc.place_id = pl.id left join lots on lots.auction_id = auc.id
+        "SELECT auc.id id, auc.name name, date_auc, time_auc, pl.name place, auc.description descr, count(lots.id) auc_c
+        FROM auctions auc inner join places pl on auc.place_id = pl.id left join lots on lots.auc_id = auc.id
         WHERE pl.id = {$_GET['place']}
         GROUP BY auc.id
         ORDER BY auc_c DESC ";
@@ -25,6 +26,7 @@ function create_table($conn)
         $id = $row['id'];
         $time_auc = convert_time($row['time_auc']);
         echo "<tr>";
+        echo "<td>{$row['name']}</td>";
         echo "<td>{$row['place']}</td>";
         echo "<td>{$row['descr']}</td>";
         echo "<td>{$row['date_auc']}</td>";
@@ -36,7 +38,7 @@ function create_table($conn)
 
     echo "</table>";
 
-    mysqli_free_result($result);
+    $result->free_result();
 
     //        include_once("db/db_conn_close.php");
 
@@ -44,7 +46,7 @@ function create_table($conn)
 }
 
 ?>
-<html>
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <title>Хронология аукционов</title>
@@ -62,7 +64,7 @@ function create_table($conn)
             Место проведения:
             <select id="place" name="place">
                 <?php
-                $query = "SELECT id, name FROM place";
+                $query = "SELECT id, name FROM places";
                 $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
                 while ($row = mysqli_fetch_assoc($result)) {
                     $cur_id = $row['id'];

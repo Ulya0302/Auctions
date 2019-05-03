@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <title>Места проведения аукционов</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -27,7 +27,7 @@
     <?php
     if (isset($_GET["del"])) {
         $id = $_GET["del"];
-        $query = "DELETE FROM place where id={$id}";
+        $query = "DELETE FROM places where id={$id}";
         $res = $conn->query($query);
         if ($res == false) {
             if ($conn->errno == 1451) {
@@ -39,7 +39,7 @@
     }
 
     $query =
-        "SELECT id, name, city, street, street_number n from place";
+        "SELECT id, name, city, street, number n from places";
 
     $result = $conn->query($query);
 

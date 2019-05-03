@@ -1,4 +1,4 @@
-<html>
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <title>Добавить место</title>
@@ -18,14 +18,14 @@ $form = new AddForm();
 $form->filename = 'add_place.php';
 $form->newTitle = 'Добавить место';
 $form->editTitle = 'Изменить информацию о месте';
-$form->tableName = 'place';
+$form->tableName = 'places';
 $form->errno1062unic = 'краткое наименование должно быть уникальным';
 $form->fields =
     array(
-        array('label' => 'Краткое наименование', 'type' => 'text', 'name' => 'name'),
-        array('label' => 'Город', 'type' => 'text', 'name' => 'city'),
-        array('label' => 'Улица', 'type' => 'text', 'name' => 'street'),
-        array('label' => 'Номер дома', 'type' => 'text', 'name' => 'street_number'),
+        array('label' => 'Краткое наименование', 'type' => 'text-with-max', 'name' => 'name', 'max' => '60'),
+        array('label' => 'Город', 'type' => 'text-with-max', 'name' => 'city', 'max' => '60'),
+        array('label' => 'Улица', 'type' => 'text-with-max', 'name' => 'street', 'max' => '60'),
+        array('label' => 'Номер дома', 'type' => 'text-with-max', 'name' => 'number', 'max' => '15'),
     );
 $form->initForm();
 $form->makeRes();

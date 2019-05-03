@@ -1,4 +1,4 @@
-<html>
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <title>Добавить участника</title>
@@ -22,8 +22,9 @@ $form->tableName = 'participants';
 $form->errno1062unic = 'краткое наименование, номер телефона и email должны быть уникальными';
 $form->fields =
     array(
-        array('label' => 'Краткое наименование: ', 'type' => 'text', 'name' => 'name'),
-        array('label' => 'Телефон: ', 'type' => 'tel', 'name' => 'phone'),
+        array('label' => 'Краткое наименование: ', 'type' => 'text-with-max', 'name' => 'name', 'max' => '60'),
+        array('label' => 'Телефон: ', 'type' => 'tel', 'name' => 'phone',
+            'placeholder' => '10 цифр, начиная с +7', 'pattern' => '\+7[0-9]{10}'),
         array('label' => 'Email: ', 'type' => 'email', 'name' => 'email'),
     );
 $form->initForm();
