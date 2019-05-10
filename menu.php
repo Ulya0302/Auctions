@@ -23,7 +23,6 @@
         <button class="dropbtn">Лоты</button>
         <div class="dropdown-content">
             <a href="add_lot.php">Добавить новый лот</a>
-            <a href="menu.php">Получить лоты</a>
         </div>
     </div>
 

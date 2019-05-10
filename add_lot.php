@@ -23,8 +23,8 @@ $form->errno1062unic = 'Лот с таким номером или такой п
 $form->disabled_cols = ['auction_id', 'subject_id'];
 $form->fields =
     array(
-        array('label' => 'Аукцион: ', 'type' => 'selection', 'name' => 'auction_id',
-            'selection' => array('val' => 'id', 'viewVal' => 'description', 'tableName' => 'auctions')),
+        array('label' => 'Аукцион: ', 'type' => 'selection', 'name' => 'auc_id',
+            'selection' => array('val' => 'id', 'viewVal' => 'name', 'tableName' => 'auctions')),
         array('label' => 'Предмет: ', 'type' => 'selection', 'name' => 'thing_id',
             'selection' => array('val' => 'id', 'viewVal' => 'name', 'tableName' => 'things')),
         array('label' => 'Номер лота: ', 'type' => 'number', 'name' => 'lot_number', 'max' => '9999999999'),

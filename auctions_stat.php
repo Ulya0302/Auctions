@@ -44,7 +44,7 @@ if (isset($_GET["del"])) {
     <?php
 
     $query =
-        "SELECT auc.id id, auc.name name, date_auc, time_auc, pl.name place, auc.description descr, sum(start_cost) sum_c 
+        "SELECT auc.id id, auc.name name, date_auc, time_auc, pl.name place, auc.description descr, sum(final_cost) sum_c 
         FROM auctions auc left join lots on auc.id=lots.auc_id 
             left join purchases p on lots.id = p.lot_id 
             inner  join places pl on auc.place_id = pl.id

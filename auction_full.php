@@ -8,12 +8,12 @@
 <?php include_once("menu.php");
 include_once('db/db_conn_open.php');
 include_once('utils.php');
-$id = $_GET['id'];
+$auc_id = $_GET['id'];
 $query =
     "SELECT date_auc, time_auc, pl.name place, auc.description descr
         FROM auctions auc 
         inner join places pl on auc.place_id = pl.id
-        WHERE auc.id = {$id}";
+        WHERE auc.id = {$auc_id}";
 $result_auc = mysqli_query($conn, $query) or die(mysqli_error($conn));
 $row = $result_auc->fetch_assoc();
 $auc_date = $row['date_auc'];
@@ -28,14 +28,26 @@ echo "<p>Время аукциона: {$auc_time}</p><hr/>";
 echo "<p>Место: {$auc_place}</p><hr/>";
 
 $query =
-    "SELECT s.name name, start_cost from lots 
+    "SELECT lots.id id, name, start_cost from lots 
     inner join things s on s.id = lots.thing_id
-    where auc_id = ${id}";
-$result_lots = mysqli_query($conn, $query) or die(mysqli_error($conn));;
+    where auc_id = ${auc_id}";
+$result_lots = $conn->query($query);
 echo "<p>Лоты, выставленные на аукционе:</p>";
 echo "<ol>";
 while ($row = $result_lots->fetch_assoc()) {
-    echo "<li>{$row['name']}<br>Стартовая цена: {$row['start_cost']}</li><br>";
+
+    echo "<li>{$row['name']}<br>Стартовая цена: {$row['start_cost']}<br>";
+    $query_new = "SELECT id, final_cost f FROM purchases WHERE lot_id=" . $row['id'];
+    $res_lot = $conn->query($query_new);
+    if ($row_q = $res_lot->fetch_assoc()) {
+        echo "<span style='color: #000000; background-color: #00ff96'>Лот продан.<br> Финальная цена: " . $row_q['f'] . "</span>";
+    } else {
+        echo "<a class='simplebtn'
+                href='add_purchase.php?auc_id={$auc_id}&lot_id={$row['id']}'>Добавить факт продажи</a>";
+    }
+    $res_lot->free_result();
+    echo "</li><br>";
+
 }
 echo "</ol>";
 echo "</div>";

@@ -65,7 +65,7 @@ class AddForm
 
     }
 
-    private function generateSelection($name, $val, $viewVal, $nameTable)
+    function generateSelection($name, $val, $viewVal, $nameTable)
     {
         echo '<select id="' . $name . '" name="' . $name . '">';
         global $conn;
