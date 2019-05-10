@@ -31,7 +31,8 @@
         <button class="dropbtn">Предметы</button>
         <div class="dropdown-content">
             <a href="add_subject.php">Добавить предмет</a>
-            <a href="all_place.php">Показать текущие предметы</a>
+            <a href="all_things.php">Показать все предметы</a>
+            <a href="thing_stat.php">Показать проданные предметы</a>
         </div>
     </div>
 

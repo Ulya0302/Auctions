@@ -19,7 +19,7 @@
     <tr>
         <th class="col-20 centered-text">Краткое наименование</th>
         <th class="col-20 centered-text">Город</th>
-        <th class="col-30 centered-text">Улица</th>
+        <th class="col-20 centered-text">Улица</th>
         <th class="col-10">Номер дома</th>
         <th class="col-10"></th>
         <th class="col-10"></th>

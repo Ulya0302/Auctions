@@ -14,7 +14,7 @@ class AddForm
 
     function initForm()
     {
-        echo '<form class="main-form width-40" id="new_item" method="POST" action="' . $this->filename . '">';
+        echo '<form class="main-form width-60" id="new_item" method="POST" action="' . $this->filename . '">';
         echo '<h2 align="center" id="title">' . $this->newTitle . '</h2>';
         echo '<input id="id" name="id" hidden>';
         foreach ($this->fields as $field) {

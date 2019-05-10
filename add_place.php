@@ -22,10 +22,10 @@ $form->tableName = 'places';
 $form->errno1062unic = 'краткое наименование должно быть уникальным';
 $form->fields =
     array(
-        array('label' => 'Краткое наименование', 'type' => 'text-with-max', 'name' => 'name', 'max' => '60'),
-        array('label' => 'Город', 'type' => 'text-with-max', 'name' => 'city', 'max' => '60'),
-        array('label' => 'Улица', 'type' => 'text-with-max', 'name' => 'street', 'max' => '60'),
-        array('label' => 'Номер дома', 'type' => 'text-with-max', 'name' => 'number', 'max' => '15'),
+        array('label' => 'Краткое наименование: ', 'type' => 'text-with-max', 'name' => 'name', 'max' => '60'),
+        array('label' => 'Город: ', 'type' => 'text-with-max', 'name' => 'city', 'max' => '60'),
+        array('label' => 'Улица: ', 'type' => 'text-with-max', 'name' => 'street', 'max' => '60'),
+        array('label' => 'Номер дома:', 'type' => 'text-with-max', 'name' => 'number', 'max' => '15'),
     );
 $form->initForm();
 $form->makeRes();

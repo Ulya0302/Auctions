@@ -3,35 +3,33 @@ function create_table($conn)
 {
     $date_from = $_GET['fromDate'];
     $date_to = $_GET['toDate'];
-    echo "<hr/><h3 align='center'>Участвующие в аукционах продавцы с {$date_from} по {$date_to}</h3><hr/>";
+    echo "<hr/><h3 align='center'>Предметы, проданные на аукционах, с {$date_from} по {$date_to}</h3><hr/>";
     echo '
     <table class="main-table width-60">
     <tr style="height: 40px">
-        <th>Участник</th>
-        <th>Телефон</th>
-        <th>Email</th>
-        <th class="col-10">Кол-во купленных предметов</th>
+        <th>Предмет</th>
+        <th>Описание</th>
+        <th>Собственник</th>
         <th class="col-10"></th>
     </tr>';
     $query =
-        "SELECT p.id id, p.name name, phone, email, count(pr.id) c
-            FROM participants p
-            inner join purchases pr on pr.buyer_id=p.id
-            inner join lots l on pr.lot_id = l.id
-            inner JOIN auctions a on l.auc_id = a.id
-            where a.date_auc >= '{$date_from}' and a.date_auc <= '{$date_to}'
-            GROUP BY p.name";
+        "SELECT t.id, p.name p_name, t.description description, t.name t_name FROM things t
+         INNER JOIN participants p ON t.owner_id=p.id 
+         INNER JOIN lots l ON l.thing_id=t.id
+         INNER JOIN purchases pur ON pur.lot_id=l.id
+         INNER JOIN auctions a ON a.id=l.auc_id
+         where a.date_auc >= '{$date_from}' and a.date_auc <= '{$date_to}'
+         ORDER BY 2";
 
     $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
 
     while ($row = $result->fetch_assoc()) {
         $id = $row['id'];
         echo "<tr>";
-        echo "<td>{$row['name']}</td>";
-        echo "<td>{$row['phone']}</td>";
-        echo "<td>{$row['email']}</td>";
-        echo "<td>{$row['c']}</td>";
-        echo "<td><a class='changebtn' href='buyer_full.php?id={$id}&dateFrom=$date_from&dateTo=$date_to'>Подробнее</a>";
+        echo "<td>{$row['t_name']}</td>";
+        echo "<td>{$row['description']}</td>";
+        echo "<td>{$row['p_name']}</td>";
+        echo "<td><a class='changebtn' href='thing_full.php?id={$id}&dateFrom=$date_from&dateTo=$date_to'>Подробнее</a>";
         echo "</tr>";
     }
 
@@ -48,7 +46,7 @@ function create_table($conn)
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <title>Статистика продавцов</title>
+    <title>Проданные предметы</title>
     <link type="text/css" href="css/form-style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/table-style.css" type="text/css">
     <link rel="stylesheet" href="css/common.css" type="text/css">
@@ -58,7 +56,7 @@ function create_table($conn)
 </head>
 <body onload="setData()">
 <?php include_once("menu.php") ?>
-<form class="main-form width-40" method="GET" action="buyer_stat.php">
+<form class="main-form width-40" method="GET" action="thing_stat.php">
     <p><label>С даты: <input placeholder="С даты" id="fromDate" class="form-input" name="fromDate" type="date"
                              required/></label></p>
     <p><label>По дату: <input placeholder="По дату" id="toDate" class="form-input" name="toDate" type="date" required/></label>
