@@ -3,38 +3,35 @@ function create_table($conn)
 {
     $date_from = $_GET['fromDate'];
     $date_to = $_GET['toDate'];
-    echo "<hr/><h3 align='center'>Статистика по доходу продавцов в аукционах с {$date_from} по {$date_to}</h3><hr/>";
+    echo "<hr/><h3 align='center'>Участвующие в аукционах продавцы с {$date_from} по {$date_to}</h3><hr/>";
     echo '
     <table class="main-table width-60">
     <tr style="height: 40px">
         <th>Участник</th>
         <th>Телефон</th>
         <th>Email</th>
-        <th>Суммарный доход</th>
+        <th class="col-10">Кол-во купленных предметов</th>
         <th class="col-10"></th>
     </tr>';
     $query =
-        "SELECT p.id id, p.name name, phone, email, sum(pur.final_cost) profit
+        "SELECT p.id id, p.name name, phone, email, count(pr.id) c
             FROM participants p
-            left join things s on s.owner_id = p.id
-            left join lots l on l.thing_id = s.id
-            left join purchases pur on pur.lot_id = l.id
-            left JOIN auctions a on l.auc_id = a.id
+            inner join purchases pr on pr.buyer_id=p.id
+            inner join lots l on pr.lot_id = l.id
+            inner JOIN auctions a on l.auc_id = a.id
             where a.date_auc >= '{$date_from}' and a.date_auc <= '{$date_to}'
-            GROUP BY p.name
-            ORDER BY profit desc 
-";
+            GROUP BY p.name";
 
     $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
 
-    while ($row = mysqli_fetch_assoc($result)) {
+    while ($row = $result->fetch_assoc()) {
         $id = $row['id'];
         echo "<tr>";
         echo "<td>{$row['name']}</td>";
         echo "<td>{$row['phone']}</td>";
         echo "<td>{$row['email']}</td>";
-        echo "<td>{$row['profit']}</td>";
-        echo "<td><a class='changebtn' href='seller_full.php?id={$id}&dateFrom=$date_from&dateTo=$date_to'>Подробнее</a>";
+        echo "<td>{$row['c']}</td>";
+        echo "<td><a class='changebtn' href='buyer_full.php?id={$id}&dateFrom=$date_from&dateTo=$date_to'>Подробнее</a>";
         echo "</tr>";
     }
 
@@ -61,7 +58,7 @@ function create_table($conn)
 </head>
 <body onload="setData()">
 <?php include_once("menu.php") ?>
-<form class="main-form width-40" method="GET" action="seller_profit_chronology.php">
+<form class="main-form width-40" method="GET" action="buyer_stat.php">
     <p><label>С даты: <input placeholder="С даты" id="fromDate" class="form-input" name="fromDate" type="date"
                              required/></label></p>
     <p><label>По дату: <input placeholder="По дату" id="toDate" class="form-input" name="toDate" type="date" required/></label>

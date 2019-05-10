@@ -10,7 +10,7 @@ function create_table($conn)
         <th>Участник</th>
         <th>Телефон</th>
         <th>Email</th>
-        <th></th>
+        <th class="col-10"></th>
     </tr>';
     $query =
         "SELECT p.id id, p.name name, phone, email

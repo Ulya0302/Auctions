@@ -37,10 +37,27 @@ echo "<ol>";
 while ($row = $result_lots->fetch_assoc()) {
 
     echo "<li>{$row['name']}<br>Стартовая цена: {$row['start_cost']}<br>";
-    $query_new = "SELECT id, final_cost f FROM purchases WHERE lot_id=" . $row['id'];
+    $query_new =
+        "SELECT final_cost f, pr.name name FROM purchases p 
+            INNER JOIN lots l on l.id=p.lot_id
+            INNER JOIN things t ON t.id=l.thing_id
+            INNER JOIN participants pr ON pr.id=t.owner_id
+            WHERE lot_id={$row['id']}";
     $res_lot = $conn->query($query_new);
+    $query =
+        "SELECT pr.name name FROM purchases p 
+         INNER JOIN lots l on l.id=p.lot_id 
+         INNER JOIN participants pr ON pr.id=p.buyer_id
+         WHERE lot_id={$row['id']}";
+    $res_buy = $conn->query($query);
+    echo $conn->error;
     if ($row_q = $res_lot->fetch_assoc()) {
-        echo "<span style='color: #000000; background-color: #00ff96'>Лот продан.<br> Финальная цена: " . $row_q['f'] . "</span>";
+        $row_an = $res_buy->fetch_assoc();
+        echo "<span style='color: #000000; background-color: #00ff96'>Лот продан. </span>
+               <span style='background-color: rgba(120,255,201,0.66);'>
+                <br> Финальная цена: " . $row_q['f'] . "
+                <br> Продавец: " . $row_q['name'] . "
+                <br> Покупатель: " . $row_an['name'] . "</span>";
     } else {
         echo "<a class='simplebtn'
                 href='add_purchase.php?auc_id={$auc_id}&lot_id={$row['id']}'>Добавить факт продажи</a>";

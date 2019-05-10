@@ -16,6 +16,7 @@
             <a href="add_participant.php">Добавить нового участника</a>
             <a href="seller_profit_chronology.php">Статистика по доходам продавцов</a>
             <a href="seller_activity.php">Статистика по активности продавцов</a>
+            <a href="buyer_stat.php">Статистика по покупателям</a>
         </div>
     </div>
 
