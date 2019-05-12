@@ -1,13 +1,2 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Аукционы</title>
-</head>
-<body>
-	
-</body>
-</html>
-
-
-
+<?php
+header("Location: auctions_stat.php");

@@ -11,6 +11,9 @@
 </head>
 <body>
 <?php
+if (isset($_GET['error'])) {
+    error("Добавить не удалось: {$_GET['message']}");
+}
 echo '<form class="main-form width-60" id="new_item" method="POST" action="add_purchase.php">';
 echo '<h2 align="center">Добавить факт продажи</h2>';
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -49,13 +52,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $res = $conn->query($query);
     echo $conn->error;
     if ($res) {
-        alert("Добавлено");
-        echo "<script>window.location.href='auction_full.php?id={$auc_id}'</script>";
+        header("Location: auction_full.php?id={$auc_id}");
     } else {
-        alert("Добавить не удалось: " . $conn->error);
-        echo "<script>window.location.href='add_purchase.php?auc_id={$auc_id}&lot_id={$lot_id}'</script>";
+        header("Location: add_purchase.php?auc_id={$auc_id}&lot_id={$lot_id}&error=true&message={$conn->error}");
     }
+
 }
+
 
 ?>
 

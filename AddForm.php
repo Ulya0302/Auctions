@@ -114,12 +114,12 @@ class AddForm
         VALUES ('$col_values')";
         $result = $conn->query($query);
         if ($result == true) {
-            alert('Новая запись добавлена успешно');
+            success('Новая запись добавлена успешно');
         } else {
             if ($conn->errno == 1062) {
-                alert("Ошибка, добавить запись не удалось: " . $this->errno1062unic);
+                error("Ошибка, добавить запись не удалось: " . $this->errno1062unic);
             } else {
-                alert("Неизвестная ошибка");
+                error("Неизвестная ошибка");
             }
         }
     }
@@ -140,9 +140,9 @@ class AddForm
             "UPDATE " . $this->tableName . " SET $cols WHERE id = $id";
         $result = $conn->query($query);
         if ($result == true) {
-            alert('Изменено!');
+            success('Изменено!');
         } else {
-            alert('Не удалось изменить: ' . $conn->error);
+            error('Не удалось изменить: ' . $conn->error);
         }
     }
 
@@ -176,7 +176,7 @@ class AddForm
             }
             $this->set_disabled();
         } else {
-            alert('Не удалось загрузить данные');
+            error('Не удалось загрузить данные');
         }
     }
 

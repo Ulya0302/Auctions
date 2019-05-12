@@ -35,7 +35,7 @@ echo "<p>Аукционы, в которых этот предмет участ�
 echo "<ol>";
 while ($row = $res->fetch_assoc()) {
     $id = $row['id'];
-    echo "<li><a class='simplebtn' href='auction_full.php?id=$id'>{$row['name']}</a><br></li";
+    echo "<li><a class='simplebtn' href='auction_full.php?id=$id'>{$row['name']}</a></li><br>";
 }
 echo "</ol>";
 echo "</div>";

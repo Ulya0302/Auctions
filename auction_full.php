@@ -35,15 +35,15 @@ $result_lots = $conn->query($query);
 echo "<p>Лоты, выставленные на аукционе:</p>";
 echo "<ol>";
 while ($row = $result_lots->fetch_assoc()) {
-
-    echo "<li>{$row['name']}<br>Стартовая цена: {$row['start_cost']}<br>";
-    $query_new =
+    $t_name = $row['name'];
+    echo "<li>$t_name<br>Стартовая цена: {$row['start_cost']}<br>";
+    $query =
         "SELECT final_cost f, pr.name name FROM purchases p 
             INNER JOIN lots l on l.id=p.lot_id
             INNER JOIN things t ON t.id=l.thing_id
             INNER JOIN participants pr ON pr.id=t.owner_id
             WHERE lot_id={$row['id']}";
-    $res_lot = $conn->query($query_new);
+    $res_lot = $conn->query($query);
     $query =
         "SELECT pr.name name FROM purchases p 
          INNER JOIN lots l on l.id=p.lot_id 
@@ -62,6 +62,7 @@ while ($row = $result_lots->fetch_assoc()) {
         echo "<a class='simplebtn'
                 href='add_purchase.php?auc_id={$auc_id}&lot_id={$row['id']}'>Добавить факт продажи</a>";
     }
+    $res_buy->free_result();
     $res_lot->free_result();
     echo "</li><br>";
 

@@ -11,9 +11,22 @@
 </head>
 <body>
 
+<?php
+if (isset($_GET["del"])) {
+    $id = $_GET["del"];
+    $query = "DELETE FROM places where id={$id}";
+    $res = $conn->query($query);
+    if ($res == false) {
+        if ($conn->errno == 1451) {
+            error('Удалить не удалось: в этом месте проводятся аукционы');
+        } else {
+            error('Удалить не удалось: непредвиденная ошиибка');
+        }
+    }
+}
+?>
+
 <h3 align="center">Места проведения аукционов</h3>
-
-
 <hr/>
 <table class="main-table width-60">
     <tr>
@@ -25,18 +38,7 @@
         <th class="col-10"></th>
     </tr>
     <?php
-    if (isset($_GET["del"])) {
-        $id = $_GET["del"];
-        $query = "DELETE FROM places where id={$id}";
-        $res = $conn->query($query);
-        if ($res == false) {
-            if ($conn->errno == 1451) {
-                alert('Удалить не удалось: в этом месте проводятся существующие аукционы');
-            } else {
-                alert('Удалить не удалось: непредвиденная ошиибка');
-            }
-        }
-    }
+
 
     $query =
         "SELECT id, name, city, street, number n from places";
@@ -65,21 +67,3 @@
 </table>
 </body>
 </html>
-
-<?php
-//include_once("db/db_conn_open.php");
-//include_once("utils.php");
-//if (isset($_GET["del"])) {
-//    $id = $_GET["del"];
-//    $query = "DELETE FROM place where id={$id}";
-//    $res = $conn->query($query);
-//    if ($res == false) {
-//        if ($conn->errno == 1451) {
-//            alert('Удалить не удалось: в этом месте проводятся существующие аукционы');
-//        } else {
-//            alert('Удалить не удалось: непредвиденная ошиибка');
-//        }
-//    }
-//}
-//
-//?>

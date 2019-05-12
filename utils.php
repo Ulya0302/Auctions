@@ -4,7 +4,14 @@ function convert_time($time) {
     return date_format($time_c, "H:i");
 }
 
-function alert($text) {
-    echo "<script>alert(\"{$text}\")</script>";
+function error($text)
+{
+    echo "<div class='error-block'>$text</div>";
 }
+
+function success($text)
+{
+    echo "<div class='success-block'>$text</div>";
+}
+
 

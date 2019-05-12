@@ -17,3 +17,28 @@
 .col-20 {
     width: 20%;
 }
+
+.error-block {
+    width: 300px;
+    border: 1px solid red;
+    background-color: #ffc9bf;
+    border-radius: 5px;
+    margin-left: 20%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    padding: 5px;
+
+}
+
+.success-block {
+    width: 300px;
+    border: 1px solid #00ff0a;
+    background-color: #aaffbd;
+    border-radius: 5px;
+    margin-left: 20%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    padding: 5px;
+}

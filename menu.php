@@ -1,4 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+}
+?>
 <link rel="stylesheet" href="css/dropdown-menu.css" type="text/css">
+<link rel="stylesheet" href="css/form-style.css" type="text/css">
+<link rel="stylesheet" href="css/common.css" type="text/css">
 <nav>
     <div class="dropdown" >
         <button class="dropbtn">Аукционы</button>
@@ -43,7 +51,11 @@
             <a href="all_place.php">Показать текущие места</a>
         </div>
     </div>
+    <div style="float: right">
+        <a href="logout.php" class="simplebtn">Выйти</a>
+    </div>
 </nav>
+<?php echo "<span style='float: right;'>Добро пожаловать, {$_SESSION['user']}</span><br>"; ?>
 <hr/>
 
 
