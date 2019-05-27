@@ -1,12 +1,10 @@
 <html lang="ru">
 <head>
     <title>Подробная информация</title>
-    <link rel="stylesheet" type="text/css" href="css/form-style.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
 </head>
 <body>
-<?php include_once("menu.php");
-include_once('db/db_conn_open.php');
+<?php
+include_once("menu.php");
 $id = $_GET['id'];
 $date_from = $_GET['dateFrom'];
 $date_to = $_GET['dateTo'];
@@ -40,6 +38,5 @@ echo "</ol>";
 echo "</div>";
 $res->free_result();
 ?>
-
 </body>
 </html>

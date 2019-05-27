@@ -1,16 +1,11 @@
-<html>
+<html lang="ru">
 <head>
-    <link type="text/css" rel="stylesheet" href="css/form-style.css">
-    <link type="text/css" rel="stylesheet" href="css/common.css">
     <title>Покупки</title>
-    <?php
-    include_once('menu.php');
-    include_once('utils.php');
-    include_once('db/db_conn_open.php');
-    include_once('AddForm.php'); ?>
+    <?php require_once('AddForm.php') ?>
 </head>
 <body>
 <?php
+include_once("menu.php");
 if (isset($_GET['error'])) {
     error("Добавить не удалось: {$_GET['message']}");
 }
@@ -58,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 
 }
-
+include_once("db/db_conn_close.php");
 
 ?>
 

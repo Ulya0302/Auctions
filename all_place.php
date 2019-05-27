@@ -3,15 +3,10 @@
 <head>
     <title>Места проведения аукционов</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="css/table-style.css" type="text/css">
-    <link rel="stylesheet" href="css/common.css" type="text/css">
-    <?php include_once("menu.php") ?>
-    <?php include_once("db/db_conn_open.php");
-    include_once("utils.php") ?>
 </head>
 <body>
-
 <?php
+include_once("menu.php");
 if (isset($_GET["del"])) {
     $id = $_GET["del"];
     $query = "DELETE FROM places where id={$id}";
@@ -61,8 +56,7 @@ if (isset($_GET["del"])) {
     }
 
     $result->free_result();
-    //        include_once("db/db_conn_close.php");
-
+    include_once("db/db_conn_close.php");
     ?>
 </table>
 </body>

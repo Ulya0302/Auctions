@@ -3,12 +3,16 @@ session_start();
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
+require_once("utils.php");
+include_once("db/db_conn_open.php");
 ?>
 <link rel="stylesheet" href="css/dropdown-menu.css" type="text/css">
 <link rel="stylesheet" href="css/form-style.css" type="text/css">
 <link rel="stylesheet" href="css/common.css" type="text/css">
+<link rel="stylesheet" href="css/table-style.css" type="text/css">
+
 <nav>
-    <div class="dropdown" >
+    <div class="dropdown">
         <button class="dropbtn">Аукционы</button>
         <div class="dropdown-content">
             <a href="add_auction.php">Добавить аукцион</a>

@@ -4,9 +4,8 @@
 class AddForm
 {
     public $fields; // [[nameDB, type, label, selection(val, viewVal, tableName)][]]
-    public $filename;
+    private $filename;
     public $tableName;
-    public $nameForm;
     public $newTitle;
     public $editTitle;
     public $errno1062unic;
@@ -14,6 +13,7 @@ class AddForm
 
     function initForm()
     {
+        $this->filename = basename($_SERVER['REQUEST_URI']);
         echo '<form class="main-form width-60" id="new_item" method="POST" action="' . $this->filename . '">';
         echo '<h2 align="center" id="title">' . $this->newTitle . '</h2>';
         echo '<input id="id" name="id" hidden>';

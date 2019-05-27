@@ -34,31 +34,18 @@ function create_table($conn)
         echo "<td><a class='changebtn' href='auction_full.php?id={$id}'>Подробнее</a>";
         echo "</tr>";
     }
-
     echo "</table>";
-
-    mysqli_free_result($result);
-
-    //        include_once("db/db_conn_close.php");
-
-
+    $result->free_result();
 }
-
 ?>
 <html lang="ru">
 <head>
     <meta charset="utf-8">
     <title>Хронология аукционов</title>
-    <link type="text/css" href="css/form-style.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/table-style.css" type="text/css">
-    <link rel="stylesheet" href="css/common.css" type="text/css">
-    <?php include_once("db/db_conn_open.php");
-    include_once("utils.php")?>
-
 </head>
 <body onload="setData()">
 <?php include_once("menu.php") ?>
-<form class="main-form width-40"  method="GET" action="auction_chronology.php">
+<form class="main-form width-40" method="GET" action="auction_chronology.php">
     <p><label>С даты: <input placeholder="С даты" id="fromDate" class="form-input" name="fromDate" type="date"
                              required/></label></p>
     <p><label>По дату: <input placeholder="По дату" id="toDate" class="form-input" name="toDate" type="date" required/></label>
@@ -69,7 +56,7 @@ function create_table($conn)
 if (isset($_GET['fromDate']) && isset($_GET['toDate'])) {
     create_table($conn);
 }
-
+include_once("db/db_conn_close.php");
 ?>
 <script type="text/javascript">
     function setData() {

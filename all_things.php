@@ -55,7 +55,7 @@ if (isset($_GET["del"])) {
     }
 
     $result->free_result();
-    //        include_once("db/db_conn_close.php");
+    include_once("db/db_conn_close.php");
 
     ?>
 </table>

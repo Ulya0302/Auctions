@@ -1,13 +1,10 @@
 <html lang="ru">
 <head>
     <title>Подробная информация</title>
-    <link rel="stylesheet" type="text/css" href="css/form-style.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
 </head>
 <body>
-<?php include_once("menu.php");
-include_once('db/db_conn_open.php');
-include_once('utils.php');
+<?php
+include_once("menu.php");
 $auc_id = $_GET['id'];
 $query =
     "SELECT date_auc, time_auc, pl.name place, auc.description descr
@@ -20,7 +17,7 @@ $auc_date = $row['date_auc'];
 $auc_time = convert_time($row['time_auc']);
 $auc_place = $row['place'];
 $descr = $row['descr'];
-mysqli_free_result($result_auc);
+$result_auc->free_result();
 echo "<div class='main-form width-40'>";
 echo "<p>{$descr}</p><hr/>";
 echo "<p>Дата аукциона: {$auc_date}</p><hr/>";
@@ -70,7 +67,7 @@ while ($row = $result_lots->fetch_assoc()) {
 echo "</ol>";
 echo "</div>";
 $result_lots->free_result();
+include_once("db/db_conn_close.php");
 ?>
-
 </body>
 </html>

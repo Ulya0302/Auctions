@@ -1,8 +1,6 @@
 <html lang="ru">
 <head>
     <title>Подробная информация</title>
-    <link rel="stylesheet" type="text/css" href="css/form-style.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
 </head>
 <body>
 <?php include_once("menu.php");
@@ -40,6 +38,7 @@ while ($row = $res->fetch_assoc()) {
 echo "</ol>";
 echo "</div>";
 $res->free_result();
+include_once("db/db_conn_close.php");
 ?>
 
 </body>

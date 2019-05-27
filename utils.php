@@ -13,5 +13,3 @@ function success($text)
 {
     echo "<div class='success-block'>$text</div>";
 }
-
-
