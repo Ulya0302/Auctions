@@ -37,10 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 <form class="main-form width-60" action="registration.php" method="POST">
     <h4 align="center">Зарегистрироваться</h4>
+    <h5 align="center">Внимание! В логине и пароле могут использоваться только буквы и цифры, не больше 30 символов</h5>
     <p><label for="username">Логин: </label>
-        <input class="form-input" minlength="4" type="text" id="username" name="username" required></p>
+        <input pattern="[\dA-Za-zА-Яа-я]*" maxlength="30" class="form-input" minlength="4" type="text" id="username" name="username" required></p>
     <p><label for="password">Пароль: </label>
-        <input class="form-input" minlength="4" type="password" id="password" name="password" required></p>
+        <input pattern="[\dA-Za-zА-Яа-я]*" maxlength="30" class="form-input" minlength="4" type="password" id="password" name="password" required></p>
     <input class="submit-btn" type="submit" name="register" value="Создать">
 </form>
 </body>

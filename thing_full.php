@@ -6,8 +6,21 @@
 <?php include_once("menu.php");
 include_once('db/db_conn_open.php');
 $id = $_GET['id'];
+
+if (!is_numeric($id)) {
+    error("Ошибка");
+    exit();
+}
 $date_from = $_GET['dateFrom'];
+if (check_datetime($date_from) == false) {
+    error("Ошибка");
+    exit();
+}
 $date_to = $_GET['dateTo'];
+if (check_datetime($date_to) == false) {
+    error("Ошибка");
+    exit();
+}
 $query =
     "SELECT t.id, p.name p_name, t.description description, t.name t_name FROM things t
          INNER JOIN participants p ON t.owner_id=p.id

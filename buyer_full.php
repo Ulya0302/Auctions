@@ -5,8 +5,20 @@
 <body>
 <?php include_once("menu.php");
 $id = $_GET['id'];
+if (!is_numeric($id)) {
+    error("Ошибка");
+    exit();
+}
 $date_from = $_GET['dateFrom'];
+if (check_datetime($date_from) == false) {
+    error("Ошибка");
+    exit();
+}
 $date_to = $_GET['dateTo'];
+if (check_datetime($date_to) == false) {
+    error("Ошибка");
+    exit();
+}
 $query =
     "SELECT name, email, phone
         FROM participants p
@@ -33,7 +45,7 @@ echo "<p>Аукционы, в которых покупал предметы с 
 echo "<ol>";
 while ($row = $res->fetch_assoc()) {
     $id = $row['id'];
-    echo "<li><a class='simplebtn' href='auction_full.php?id=$id'>{$row['name']}</a><br></li";
+    echo "<li><a class='simplebtn' href='auction_full.php?id=$id'>{$row['name']}</a></li><br>";
 }
 echo "</ol>";
 echo "</div>";

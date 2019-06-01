@@ -6,6 +6,10 @@
 <?php
 include_once("menu.php");
 $auc_id = $_GET['id'];
+if (!is_numeric($auc_id)) {
+    error("Ошибка");
+    exit();
+}
 $query =
     "SELECT date_auc, time_auc, pl.name place, auc.description descr
         FROM auctions auc 

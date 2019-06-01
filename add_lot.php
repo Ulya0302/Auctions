@@ -9,10 +9,8 @@
 include_once('menu.php');
 $form = new AddForm();
 $form->newTitle = 'Добавить лот';
-$form->editTitle = 'Изменить информацию о лоте';
 $form->tableName = 'lots';
 $form->errno1062unic = 'Лот с таким номером или такой предмет уже существует на данном аукционе';
-$form->disabled_cols = ['auction_id', 'subject_id'];
 $form->fields =
     array(
         array('label' => 'Аукцион: ', 'type' => 'selection', 'name' => 'auc_id',

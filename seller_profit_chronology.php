@@ -3,6 +3,14 @@ function create_table($conn)
 {
     $date_from = $_GET['fromDate'];
     $date_to = $_GET['toDate'];
+    if (check_datetime($date_from) == false) {
+        error("Ошибка");
+        exit();
+    }
+    if (check_datetime($date_to) == false) {
+        error("Ошибка");
+        exit();
+    }
     echo "<hr/><h3 align='center'>Статистика по доходу продавцов в аукционах с {$date_from} по {$date_to}</h3><hr/>";
     echo '
     <table class="main-table width-60">

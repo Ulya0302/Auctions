@@ -14,6 +14,7 @@ include_once('utils.php');
 session_start();
 if (isset($_SESSION['user'])) {
     header('Location: auctions_stat.php');
+    exit();
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $query =
@@ -38,18 +39,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 if (isset($_GET['success'])) {
-    success("Вы успешно зарегистрированы. Теперь войдите");
+    if ($_GET['success'] == true) {
+        success("Вы успешно зарегистрированы. Теперь войдите");
+    }
 }
 if (isset($_GET['logout'])) {
-    success("Вы успешно вышли, возвращайтесь");
+    if ($_GET['logout'] == true) {
+        success("Вы успешно вышли, возвращайтесь");
+    }
 }
 ?>
 <form class="main-form width-60" action="login.php" method="POST">
     <h4 align="center">Войти</h4>
     <p><label for="username">Логин: </label>
-        <input class="form-input" type="text" id="username" name="username" required></p>
+        <input pattern="[\dA-Za-zА-Яа-я]*" maxlength="30" placeholder="Только буквы и цифры" class="form-input"
+               type="text" id="username" name="username" required></p>
     <p><label for="password">Пароль: </label>
-        <input class="form-input" type="password" id="password" name="password" required></p>
+        <input pattern="[\dA-Za-zА-Яа-я]*" maxlength="30" class="form-input" placeholder="Максимальная длина: 30"
+               type="password" id="password" name="password" required></p>
     <input class="submit-btn" type="submit" name="register" value="Войти">
 </form>
 </body>

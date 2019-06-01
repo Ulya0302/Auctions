@@ -13,3 +13,7 @@ function success($text)
 {
     echo "<div class='success-block'>$text</div>";
 }
+
+function check_datetime($x) {
+    return (date('Y-m-d', strtotime($x)) == $x);
+}

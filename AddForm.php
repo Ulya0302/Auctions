@@ -31,7 +31,7 @@ class AddForm
                     break;
                 case 'textarea':
                     echo '<p><label>' . $field['label'] .
-                        '<textarea id="' . $field['name'] . '" name="' . $field['name'] . '" required></textarea>
+                        '<textarea maxlength="150" pattern="[\d\sа-яА-Яa-zA-Z]*" id="' . $field['name'] . '" name="' . $field['name'] . '" required></textarea>
                         </label></p>';
                     break;
                 case 'tel':
